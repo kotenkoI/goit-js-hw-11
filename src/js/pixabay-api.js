@@ -9,4 +9,3 @@ import { query } from '../main';
     }
     return response.json();
   });
-}
