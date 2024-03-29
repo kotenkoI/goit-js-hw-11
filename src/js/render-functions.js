@@ -2,20 +2,9 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
-import {
-  galleryList
-} from "../main";
+
 export function renderImages(data) {
-  galleryList.innerHTML = '';
-  console.log(data);
-  const images = data.hits;
-  if (images.length == 0) {
-    iziToast.error({
-      title: 'Error',
-      message: `Error: No such pictures!`,
-      position: 'topRight',
-    });
-  }
+ 
   const galleryMarkup = images
     .map(image => {
       return `<li class="gallery-item">
