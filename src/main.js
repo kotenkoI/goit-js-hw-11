@@ -15,8 +15,7 @@ inputQuery.addEventListener('input', e => {
 const searchButton = document.getElementById('search-button');
 searchButton.addEventListener('click', () => {
   if (query) {
-    galleryList.innerHTML = '<div class="loader"></div>';
-    fetchImages(query)
+        fetchImages(query)
       .then(data => renderImages(data.hits))
       .catch(error => {
         console.log(error);
