@@ -19,6 +19,7 @@ export function fetchImages(query) {
     });
       const baseUrl = 'https://pixabay.com/api/';
     const url = `${baseUrl}?${params}`;
-   
-    return fetch(url).then(res => res.json());
+    return fetch(url).then(response => {
+    return response.json();
+  });
 }
