@@ -2,10 +2,10 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
-
+const galleryList = document.querySelector('ul.gallery');
 export function renderImages(data) {
  
-  const galleryMarkup = images
+  const galleryMarkup = data
     .map(image => {
       return `<li class="gallery-item">
         <a class="gallery-link" href="${image.largeImageURL}">
