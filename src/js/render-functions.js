@@ -1,42 +1,37 @@
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
-const galleryList = document.querySelector('ul.gallery');
-export function renderImages(data) {
- 
-  const galleryMarkup = data
-    .map(image => {
-      return `<li class="gallery-item">
-        <a class="gallery-link" href="${image.largeImageURL}">
-          <img
-            class="gallery-image"
-            width="1280"
-            height="152"
-            src="${image.webformatURL}"
-            data-source="${image.largeImageURL}"
-            alt="${image.tags}"
-          />
-          <ul class="gallery-description">
-          <li><h3>Likes</h3><p>${image.likes}</p>
-          </li>
-          <li><h3>Views</h3><p>${image.views}</p>
-            </li>
-            <li><h3>Comments</h3><p>${image.comments}</p>
-              </li>
-              <li><h3>Downloads</h3><p>${image.downloads}</p>
-                </li>
-          </ul>
-        </a>
-      </li>`;
-    })
-    .join('');
-  galleryList.insertAdjacentHTML('beforeend', galleryMarkup);
-  // Initialize SimpleLightbox
-  const galleryCfg = {
-    captionsData: 'alt',
-  };
-  let lightbox = new SimpleLightbox('.gallery a', galleryCfg);
-  lightbox.on('show.simplelightbox', function () {});
-  lightbox.refresh();
+function imageTemplate({
+  webformatURL,
+  largeImageURL,
+  tags,
+  likes,
+  views,
+  comments,
+  downloads,
+}) {
+  return `<li class="gallery-item">
+          <a class="gallery-link" href="${webformatURL}">
+        <img class="gallery-image" src="${largeImageURL}" alt="${tags}" />
+      </a>
+        <div class="image-info">
+    <ul class="infoBlock">
+    <li class="title">Likes</li>
+    <li class="info">${likes}</li>
+    </ul>
+    <ul class="infoBlock">
+    <li class="title">Views</li>
+    <li class="info">${views}</li>
+    </ul>
+    <ul class="infoBlock">
+    <li class="title">Comments</li>
+    <li class="info">${comments}</li>
+    </ul>
+    <ul class="infoBlock">
+    <li class="title">Downloads</li>
+    <li class="info">${downloads}</li>
+    </ul>
+    </div>
+  </li>`;
+}
+
+export function imagesTemplate(arr) {
+  return arr.map(imageTemplate).join('');
 }

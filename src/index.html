@@ -1,32 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homework 11</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <form class="form">
+      <input
+        class="input"
+        type="text"
+        placeholder="Search images..."
+        name="request"
+        required
+      />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Homework 11</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="./css/styles.css" />
-  <link href="
-      https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.css
-      " rel="stylesheet">
-
-</head>
-
-<body>
-
-  <div class="search-bar"> <input type="text" placeholder="Search images..." id="search-input" />
-    <button type="button" id="search-button">Search</button>
-  </div>
-  <div class="loader is-hidden"></div>
-  <ul class="gallery"></ul>
-
-
-  <script src="./main.js" type="module"></script>
-</body>
-
+      <button type="submit">Search</button>
+    </form>
+    <div class="loader"></div>
+    <ul class="gallery"></ul>
+    <script type="module" src="./main.js"></script>
+  </body>
 </html>
