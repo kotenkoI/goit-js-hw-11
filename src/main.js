@@ -1,62 +1,30 @@
-import { fetchImages } from './js/pixabay-api';
-import './css/loader-styles.css';
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
+import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import { renderGallery, galleryElement } from './js/render-functions';
-import iziToast from "izitoast";
-import "izitoast/dist/css/iziToast.min.css";
+import { fetchImages } from './js/pixabay-api';
+import { renderImages } from './js/render-functions';
+export const galleryList = document.querySelector('ul.gallery');
+export let query = '';
+const inputQuery = document.getElementById('search-input');
+inputQuery.addEventListener('input', e => {
+  query = inputQuery.value.trim();
+  galleryList.innerHTML = '';
+});
 
-
-const searchForm = document.querySelector('.form');
-const inputElement = document.querySelector('.search-input');
-const loader = document.querySelector('.loader');
-
-hideLoader();
-
-searchForm.addEventListener('submit', submitHandle);
-
-async function submitHandle(event) {
-  event.preventDefault();
-  const searchTerm = inputElement.value.trim();
-
-  if (searchTerm === '') {
-    iziToast.error({
-      title: 'Error',
-      message: 'Please enter a search term.',
-      position: 'topCenter', 
-    });
-
-    return;
-  }
-  showLoader();
-  try {
-    const images = await fetchImages(searchTerm);
-    if (images.length === 0) {
-      galleryElement.innerHTML = '';
-      iziToast.info({
-        title: 'Info',
-        message:
-          'Sorry, there are no images matching your search query. Please try again!',
-        position: 'topCenter',
+const searchButton = document.getElementById('search-button');
+searchButton.addEventListener('click', () => {
+  if (query) {
+    galleryList.innerHTML = '<div class="loader"></div>';
+    fetchImages(query)
+      .then(data => renderImages(data))
+      .catch(error => {
+        console.log(error);
+        iziToast.error({
+          title: 'Error',
+          message: `Sorry, there are no images matching your search query. Please try again!`,
+          position: 'topRight',
+        });
       });
-    } else {
-      renderGallery(images);
-      inputElement.value = '';
-    }
-  } catch (error) {
-    console.error('Error fetching images:', error);
-    iziToast.error({
-      title: 'Error',
-      message: 'Failed to fetch images. Please try again later.',
-      position: 'topCenter',
-    });
-  } finally {
-    hideLoader();
   }
-}
-function showLoader() {
-  loader.classList.remove('hidden');
-}
-
-function hideLoader() {
-  loader.classList.add('hidden');
-}
+});
